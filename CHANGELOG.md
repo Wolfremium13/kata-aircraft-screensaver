@@ -11,3 +11,7 @@
 ## ♻️ put aircraft variables as private
 
 - Reason: the aircraft variables should not expose all the variables from the start, so I moved to private variables instead.
+
+## ♻️ use is_empty method
+
+- Reason: the assert method is comparing the length of the list see if it empty or not, so I used the `is_empty()` assert method to improve legibility.

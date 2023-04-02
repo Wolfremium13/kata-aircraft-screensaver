@@ -82,4 +82,4 @@ class TestAircraft(unittest.TestCase):
 
         another_aircraft.move(Direction.West)
 
-        assert_that(len(territory.get_flying_objects())).is_equal_to(0)
+        assert_that(territory.get_flying_objects()).is_empty()
