@@ -2,7 +2,7 @@
 
 The main purpose of the kata is to handle the aircraft in the territory space making them bounce on the limits of the territory space and when they collision with other aircraft explodes.
 
-Link to the original [repository](https://github.com/lean-mind/kata-aircraft-screensaver)
+Link to the original [repository](https://github.com/lean-mind/aircraft-screensaver-kata)
 
 # 🐍 Python TDD Boilerplate
 
