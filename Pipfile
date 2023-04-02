@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+
+[dev-packages]
+assertpy = "1.1"
+black = "~=22.6"
+flake8 = "~=4.0"
+hypothesis = "*"
+isort = "~=5.8"
+mypy = "*"
+pytest = "~=7.1"
+pytest-cov = "~=3.0"
+
+[requires]
+python_version = "3.10"
