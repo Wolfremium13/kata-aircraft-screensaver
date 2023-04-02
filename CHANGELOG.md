@@ -7,3 +7,7 @@
 ## ♻️ simplify direction change
 
 - Reason: the change direction logic was changing the direction of the aircraft class if a new direction was specified on the move method. We're mutating the direction of the class and then overriding the direction parameter of the method, this doesn't make sense, so we just modify the direction of the class and then we use it.
+
+## ♻️ put aircraft variables as private
+
+- Reason: the aircraft variables should not expose all the variables from the start, so I moved to private variables instead.
