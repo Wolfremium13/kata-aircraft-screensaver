@@ -21,14 +21,11 @@ class Aircraft(FlyingObject):
     def current_position(self) -> Position:
         return self.position.copy()
 
-    def move(self, direction: Direction = None) -> None:
-        if direction is None:
-            direction = self.direction
-        else:
-            self.direction = direction
+    def move(self, new_direction: Direction = None) -> None:
+        self._assign_new_direction(new_direction)
         new_position: Position = self.position
-        match direction:
-            case direction.NorthEast:
+        match self.direction:
+            case self.direction.NorthEast:
                 if self.territory.at_northern_border(self.position):
                     new_position = Position(
                         self.position.longitude + 1, self.position.latitude + 1
@@ -41,37 +38,41 @@ class Aircraft(FlyingObject):
                     new_position = Position(
                         self.position.longitude + 1, self.position.latitude - 1
                     )
-            case direction.NorthWest:
+            case self.direction.NorthWest:
                 # Proposal: develop bounces with TDD for all directions
                 new_position = Position(
                     self.position.longitude - 1, self.position.latitude - 1
                 )
-            case direction.SouthEast:
+            case self.direction.SouthEast:
                 new_position = Position(
                     self.position.longitude + 1, self.position.latitude + 1
                 )
-            case direction.SouthWest:
+            case self.direction.SouthWest:
                 new_position = Position(
                     self.position.longitude - 1, self.position.latitude + 1
                 )
-            case direction.North:
+            case self.direction.North:
                 new_position = Position(
                     self.position.longitude, self.position.latitude - 1
                 )
-            case direction.South:
+            case self.direction.South:
                 new_position = Position(
                     self.position.longitude, self.position.latitude + 1
                 )
-            case direction.East:
+            case self.direction.East:
                 new_position = Position(
                     self.position.longitude + 1, self.position.latitude
                 )
-            case direction.West:
+            case self.direction.West:
                 new_position = Position(
                     self.position.longitude - 1, self.position.latitude
                 )
         self.position = new_position
         self.territory.update_position(self)
+
+    def _assign_new_direction(self, new_direction: Direction) -> None:
+        if new_direction:
+            self.direction = new_direction
 
     def is_colliding_with(self, flying_object: FlyingObject) -> bool:
         return self.position == flying_object.current_position()
