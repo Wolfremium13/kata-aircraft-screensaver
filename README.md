@@ -1,3 +1,7 @@
+# 🛩 Aircraft Screen Kata
+
+The main purpose of the kata is to handle the aircraft in the screen space making them bounce on the limits of the screen space and when they collision with other aircraft.
+
 # 🐍 Python TDD Boilerplate
 
 ## 🧑‍🏭 Setup
