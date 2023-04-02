@@ -76,16 +76,16 @@ class Aircraft(FlyingObject):
     def is_colliding_with(self, flying_object: FlyingObject) -> bool:
         return self.position == flying_object.current_position()
 
+    @staticmethod
+    def create(
+        position: Position, territory: Territory, direction: Direction = None
+    ) -> Union["Aircraft", ValidationError]:
+        if (
+            position.longitude > territory.max_longitude
+            or position.latitude > territory.max_latitude
+        ):
+            return ValidationError("The position cant be out of the territory")
 
-def create(
-    position: Position, territory: Territory, direction: Direction = None
-) -> Union[Aircraft, ValidationError]:
-    if (
-        position.longitude > territory.max_longitude
-        or position.latitude > territory.max_latitude
-    ):
-        return ValidationError("The position cant be out of the territory")
-
-    aircraft = Aircraft(position, territory, direction)
-    territory.register(aircraft)
-    return aircraft
+        aircraft = Aircraft(position, territory, direction)
+        territory.register(aircraft)
+        return aircraft
