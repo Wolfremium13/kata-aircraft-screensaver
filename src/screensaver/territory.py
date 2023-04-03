@@ -21,6 +21,9 @@ class Territory:
 
     def at_eastern_border(self, position: Position):
         return position.longitude == self.max_longitude
+    
+    def at_western_border(self, position: Position):
+        return position.longitude == self.min_longitude
 
     def update_position(self, flying_object: FlyingObject):
         other_objects = [f for f in self.flying_objects if f != flying_object]

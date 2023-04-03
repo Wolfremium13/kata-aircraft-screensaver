@@ -96,32 +96,32 @@ class AircraftBouncingShould(unittest.TestCase):
 
     def test_bounce_back_at_the_territory_west_border(self):
         territory = Territory(max_longitude=1, max_latitude=0)
-        an_aircraft = Aircraft.create(Position(longitude=1, latitude=0), territory)
+        an_aircraft = Aircraft.create(Position(longitude=0, latitude=0), territory)
 
         an_aircraft.move(Direction.West)
+
+        assert_that(an_aircraft.current_position()).is_equal_to(
+            Position(longitude=1, latitude=0)
+        )
+
+    def test_bounce_back_at_the_territory_northeast_border(self):
+        territory = Territory(max_longitude=1, max_latitude=1)
+        an_aircraft = Aircraft.create(Position(longitude=1, latitude=1), territory)
+
+        an_aircraft.move(Direction.NorthEast)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
             Position(longitude=0, latitude=0)
         )
 
-    def test_bounce_back_at_the_territory_northern_border(self):
-        territory = Territory(max_longitude=6, max_latitude=6)
-        an_aircraft = Aircraft.create(Position(longitude=3, latitude=0), territory)
-
-        an_aircraft.move(Direction.NorthEast)
-
-        assert_that(an_aircraft.current_position()).is_equal_to(
-            Position(longitude=4, latitude=1)
-        )
-
-    def test_bounce_back_at_the_territory_eastern_border(self):
+    def test_bounce_diagonally_at_the_territory_eastern_border_when_moving_northeast(self):
         an_aircraft = Aircraft.create(
-            Position(longitude=5, latitude=4),
-            Territory(max_longitude=5, max_latitude=5),
+            Position(longitude=2, latitude=1),
+            Territory(max_longitude=2, max_latitude=2),
         )
 
         an_aircraft.move(Direction.NorthEast)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Position(longitude=4, latitude=3)
+            Position(longitude=1, latitude=0)
         )

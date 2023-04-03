@@ -64,9 +64,14 @@ class Aircraft(FlyingObject):
                     self._position.longitude + 1, self._position.latitude
                 )
             case self._direction.West:
-                new_position = Position(
-                    self._position.longitude - 1, self._position.latitude
-                )
+                if self._territory.at_western_border(self._position):
+                    new_position = Position(
+                        self._position.longitude + 1, self._position.latitude
+                    )
+                else:
+                    new_position = Position(
+                        self._position.longitude - 1, self._position.latitude
+                    )
         self._position = new_position
         self._territory.update_position(self)
 
