@@ -53,6 +53,16 @@ class TestAircraft(unittest.TestCase):
         assert_that(an_aircraft.current_position()).is_equal_to(
             Position(longitude=0, latitude=1)
         )
+    
+    def test_aircraft_bounces_at_the_territory_south_border(self):
+        territory = Territory(max_longitude=0, max_latitude=1)
+        an_aircraft = Aircraft.create(Position(longitude=0, latitude=0), territory)
+
+        an_aircraft.move(Direction.South)
+
+        assert_that(an_aircraft.current_position()).is_equal_to(
+            Position(longitude=0, latitude=1)
+        )
 
     def test_aircraft_bounces_at_the_territory_northern_border(self):
         territory = Territory(max_longitude=6, max_latitude=6)
