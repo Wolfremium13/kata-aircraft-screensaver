@@ -15,3 +15,7 @@
 ## ♻️ use is_empty method
 
 - Reason: the assert method is comparing the length of the list see if it empty or not, so I used the `is_empty()` assert method to improve legibility.
+
+## ♻️ move all bouncing test inside another class
+
+- Reason: all the test are mixing concepts on `TestAircraft` so as first refactor I moved outside the test related with bouncing in order to improve legibility.
