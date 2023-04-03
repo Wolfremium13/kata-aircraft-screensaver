@@ -64,6 +64,7 @@ class TestAircraft(unittest.TestCase):
 
 
 class AircraftBouncingShould(unittest.TestCase):
+    # TODO: test if we're actually moving or bouncing on the tests
     def test_bounce_back_at_the_territory_north_border(self):
         territory = Territory(max_longitude=0, max_latitude=2)
         an_aircraft = Aircraft.create(Position(longitude=0, latitude=2), territory)
