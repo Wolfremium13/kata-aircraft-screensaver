@@ -32,6 +32,7 @@ class Aircraft(FlyingObject):
             self._direction = new_direction
 
     def _get_new_position_from_direction(self) -> Position:
+        # TODO: Review if positive latitude is up or down
         movement = Movement(self._position)
         directions = {
             self._direction.NorthEast: movement.go_up_right,
