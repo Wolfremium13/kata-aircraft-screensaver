@@ -19,3 +19,7 @@
 ## ♻️ move all bouncing test inside another class
 
 - Reason: all the test are mixing concepts on `TestAircraft` so as first refactor I moved outside the test related with bouncing in order to improve legibility.
+
+## ❌ added movement tests based on direction
+
+- Reason: it's not clear to me that the movement behavior doesn't overlap the bounce behavior so I created a new class and a bunch of test that doesn't move on the limits of the territory. I saw that the code it's prepared for bounce but not for a normal movement on a direction different of `NorthEast`.

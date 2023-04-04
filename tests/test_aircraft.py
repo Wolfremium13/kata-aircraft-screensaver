@@ -63,6 +63,88 @@ class TestAircraft(unittest.TestCase):
         assert_that(territory.get_flying_objects()).is_empty()
 
 
+class AircraftMovementWithDirectionShould(unittest.TestCase):
+    def test_aircraft_moves_north(self):
+        territory = Territory()
+        an_aircraft = Aircraft.create(Position(longitude=0, latitude=1), territory)
+
+        an_aircraft.move(Direction.North)
+
+        assert_that(an_aircraft.current_position()).is_equal_to(
+            Position(longitude=0, latitude=2)
+        )
+
+    def test_aircraft_moves_south(self):
+        territory = Territory()
+        an_aircraft = Aircraft.create(Position(longitude=0, latitude=1), territory)
+
+        an_aircraft.move(Direction.South)
+
+        assert_that(an_aircraft.current_position()).is_equal_to(
+            Position(longitude=0, latitude=0)
+        )
+
+    def test_aircraft_moves_east(self):
+        territory = Territory()
+        an_aircraft = Aircraft.create(Position(longitude=1, latitude=0), territory)
+
+        an_aircraft.move(Direction.East)
+
+        assert_that(an_aircraft.current_position()).is_equal_to(
+            Position(longitude=0, latitude=0)
+        )
+
+    def test_aircraft_moves_west(self):
+        territory = Territory()
+        an_aircraft = Aircraft.create(Position(longitude=1, latitude=0), territory)
+
+        an_aircraft.move(Direction.West)
+
+        assert_that(an_aircraft.current_position()).is_equal_to(
+            Position(longitude=2, latitude=0)
+        )
+
+    def test_aircraft_moves_north_west(self):
+        territory = Territory()
+        an_aircraft = Aircraft.create(Position(longitude=1, latitude=1), territory)
+
+        an_aircraft.move(Direction.NorthWest)
+
+        assert_that(an_aircraft.current_position()).is_equal_to(
+            Position(longitude=0, latitude=2)
+        )
+
+    def test_aircraft_moves_north_east(self):
+        territory = Territory()
+        an_aircraft = Aircraft.create(Position(longitude=0, latitude=0), territory)
+
+        an_aircraft.move(Direction.NorthEast)
+
+        assert_that(an_aircraft.current_position()).is_equal_to(
+            Position(longitude=1, latitude=1)
+        )
+
+    def test_aircraft_moves_south_east(self):
+        territory = Territory()
+        an_aircraft = Aircraft.create(Position(longitude=1, latitude=1), territory)
+
+        an_aircraft.move(Direction.SouthEast)
+
+        assert_that(an_aircraft.current_position()).is_equal_to(
+            Position(longitude=2, latitude=0)
+        )
+
+    def test_aircraft_moves_south_west(self):
+        territory = Territory()
+        an_aircraft = Aircraft.create(Position(longitude=1, latitude=1), territory)
+
+        an_aircraft.move(Direction.SouthWest)
+
+        assert_that(an_aircraft.current_position()).is_equal_to(
+            Position(longitude=0, latitude=0)
+        )
+
+
 class AircraftBouncingShould(unittest.TestCase):
     # TODO: test if we're actually moving or bouncing on the tests
     def test_bounce_back_at_the_territory_north_border(self):
@@ -115,7 +197,9 @@ class AircraftBouncingShould(unittest.TestCase):
             Position(longitude=0, latitude=0)
         )
 
-    def test_bounce_diagonally_at_the_territory_eastern_border_when_moving_northeast(self):
+    def test_bounce_diagonally_at_the_territory_eastern_border_when_moving_northeast(
+        self,
+    ):
         an_aircraft = Aircraft.create(
             Position(longitude=2, latitude=1),
             Territory(max_longitude=2, max_latitude=2),
