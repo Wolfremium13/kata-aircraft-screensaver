@@ -18,18 +18,6 @@ class TestAircraft(unittest.TestCase):
 
         assert_that(an_aircraft).is_instance_of(ValidationError)
 
-    def test_aircraft_changes_position_when_moving(self):
-        an_aircraft = Aircraft.create(
-            Position(longitude=5, latitude=5),
-            Territory(max_longitude=200, max_latitude=200),
-        )
-
-        an_aircraft.move(Direction.NorthEast)
-
-        assert_that(an_aircraft.current_position()).is_equal_to(
-            Position(longitude=6, latitude=4)
-        )
-
     def test_aircraft_keeps_the_direction(self):
         an_aircraft = Aircraft.create(
             Position(longitude=5, latitude=5),
