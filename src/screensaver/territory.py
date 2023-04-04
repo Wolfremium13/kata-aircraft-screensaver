@@ -1,5 +1,6 @@
 from typing import List
 
+from src.screensaver.direction import Direction
 from src.screensaver.flying_object import FlyingObject
 from src.screensaver.position import Position
 
@@ -16,16 +17,36 @@ class Territory:
         self.flying_objects.append(flying_object)
         # Proposal: handle the case of registering a collision
 
-    def at_northern_border(self, position: Position):
+    def is_at_border(self, position: Position, direction: Direction) -> bool:
+        directions = {
+            direction.North: self._at_northern_border(position),
+            direction.South: self._at_southern_border(position),
+            direction.East: self._at_eastern_border(position),
+            direction.West: self._at_western_border(position),
+            direction.NorthEast: self._at_northern_border(position)
+            and self._at_eastern_border(position),
+            direction.NorthWest: self._at_northern_border(position)
+            and self._at_western_border(position),
+            direction.SouthEast: self._at_southern_border(position)
+            and self._at_eastern_border(position),
+            direction.SouthWest: self._at_southern_border(position)
+            and self._at_western_border(position),
+        }
+        return directions.get(direction)
+
+    def _at_northern_border(self, position: Position) -> bool:
         return position.latitude == self.min_latitude
 
-    def at_eastern_border(self, position: Position):
+    def _at_eastern_border(self, position: Position) -> bool:
         return position.longitude == self.max_longitude
 
-    def at_western_border(self, position: Position):
+    def _at_western_border(self, position: Position) -> bool:
         return position.longitude == self.min_longitude
 
-    def update_position(self, flying_object: FlyingObject):
+    def _at_southern_border(self, position: Position) -> bool:
+        return position.latitude == self.max_latitude
+
+    def update_position(self, flying_object: FlyingObject) -> None:
         other_objects = [f for f in self.flying_objects if f != flying_object]
         for other_object in other_objects:
             if flying_object.is_colliding_with(other_object):
