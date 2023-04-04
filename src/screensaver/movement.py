@@ -4,7 +4,7 @@ from src.screensaver.position import Position
 
 
 @dataclass(frozen=True)
-class PositionMovement:
+class Movement:
     position: Position
 
     @property
