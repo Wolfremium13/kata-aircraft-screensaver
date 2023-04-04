@@ -37,7 +37,7 @@ class AircraftMovementWithDirectionShould(unittest.TestCase):
         an_aircraft.move(Direction.East)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Position(longitude=0, latitude=0)
+            Position(longitude=2, latitude=0)
         )
 
     def test_aircraft_moves_west(self):
@@ -46,7 +46,7 @@ class AircraftMovementWithDirectionShould(unittest.TestCase):
         an_aircraft.move(Direction.West)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Position(longitude=2, latitude=0)
+            Position(longitude=0, latitude=0)
         )
 
     def test_aircraft_moves_north_west(self):

@@ -2,6 +2,7 @@ from typing import Union
 
 from src.screensaver.direction import Direction
 from src.screensaver.flying_object import FlyingObject
+from src.screensaver.movement import PositionMovement
 from src.screensaver.position import Position
 from src.screensaver.territory import Territory
 from src.screensaver.validation_error import ValidationError
@@ -17,6 +18,7 @@ class Aircraft(FlyingObject):
         self._position = position
         self._territory = territory
         self._direction = direction
+        self._position_movement = PositionMovement(position)
 
     def current_position(self) -> Position:
         return self._position.copy()
@@ -26,52 +28,22 @@ class Aircraft(FlyingObject):
         new_position: Position = self._position
         match self._direction:
             case self._direction.NorthEast:
-                if self._territory.at_northern_border(self._position):
-                    new_position = Position(
-                        self._position.longitude + 1, self._position.latitude + 1
-                    )
-                elif self._territory.at_eastern_border(self._position):
-                    new_position = Position(
-                        self._position.longitude - 1, self._position.latitude - 1
-                    )
-                else:
-                    new_position = Position(
-                        self._position.longitude + 1, self._position.latitude - 1
-                    )
+                new_position = self._position_movement.go_up_right
             case self._direction.NorthWest:
-                # Proposal: develop bounces with TDD for all directions
-                new_position = Position(
-                    self._position.longitude - 1, self._position.latitude - 1
-                )
+                new_position = self._position_movement.go_up_left
             case self._direction.SouthEast:
-                new_position = Position(
-                    self._position.longitude + 1, self._position.latitude + 1
-                )
+                new_position = self._position_movement.go_down_right
             case self._direction.SouthWest:
-                new_position = Position(
-                    self._position.longitude - 1, self._position.latitude + 1
-                )
+                new_position = self._position_movement.go_down_left
             case self._direction.North:
-                new_position = Position(
-                    self._position.longitude, self._position.latitude - 1
-                )
+                new_position = self._position_movement.go_up
             case self._direction.South:
-                new_position = Position(
-                    self._position.longitude, self._position.latitude + 1
-                )
+                new_position = self._position_movement.go_down
             case self._direction.East:
-                new_position = Position(
-                    self._position.longitude + 1, self._position.latitude
-                )
+                new_position = self._position_movement.go_right
             case self._direction.West:
-                if self._territory.at_western_border(self._position):
-                    new_position = Position(
-                        self._position.longitude + 1, self._position.latitude
-                    )
-                else:
-                    new_position = Position(
-                        self._position.longitude - 1, self._position.latitude
-                    )
+                new_position = self._position_movement.go_left
+
         self._position = new_position
         self._territory.update_position(self)
 

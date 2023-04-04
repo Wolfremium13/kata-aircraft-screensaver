@@ -6,7 +6,7 @@ class Position:
     def copy(self):
         return Position(self.longitude, self.latitude)
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: "Position") -> bool:
         return other.longitude == self.longitude and other.latitude == self.latitude
 
     def __str__(self):
