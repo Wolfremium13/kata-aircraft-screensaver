@@ -1,5 +1,4 @@
 import pytest
-
 from assertpy import assert_that
 
 from src.screensaver.aircraft import Aircraft
@@ -7,7 +6,6 @@ from src.screensaver.direction import Direction
 from src.screensaver.movement import Movement
 from src.screensaver.position import Position
 from src.screensaver.territory import Territory
-
 
 TERRITORY = Territory(max_longitude=10, max_latitude=10)
 AIRCRAFT_POSITION = Position(longitude=5, latitude=5)
