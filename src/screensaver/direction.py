@@ -11,7 +11,7 @@ class Direction(Enum):
     SouthEast = 7
     SouthWest = 8
 
-    def opposite(self):
+    def opposite(self) -> "Direction":
         opposite_directions = {
             self.North: self.South,
             self.South: self.North,
