@@ -47,6 +47,7 @@ class Aircraft(FlyingObject):
         direction = self._territory.change_direction_based_on_border(
             self._position, self._direction
         )
+        # Check if the direction is valid after bounce?
         return movements[direction]
 
     def is_colliding_with(self, flying_object: FlyingObject) -> bool:
