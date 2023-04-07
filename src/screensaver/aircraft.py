@@ -33,44 +33,25 @@ class Aircraft(FlyingObject):
 
     def _get_new_position_from_direction(self) -> Position:
         movement = Movement(self._position)
+        directions = {
+            self._direction.NorthEast: movement.go_up_right(),
+            self._direction.NorthWest: movement.go_up_left(),
+            self._direction.SouthEast: movement.go_down_right(),
+            self._direction.SouthWest: movement.go_down_left(),
+            self._direction.North: movement.go_up(),
+            self._direction.South: movement.go_down(),
+            self._direction.East: movement.go_right(),
+            self._direction.West: movement.go_left(),
+        }
         is_at_territory_border = self._territory.is_at_border(
             self._position, self._direction
         )
-        directions = {
-            self._direction.NorthEast: (
-                movement.go_down_left()
-                if is_at_territory_border
-                else movement.go_up_right()
-            ),
-            self._direction.NorthWest: (
-                movement.go_down_right()
-                if is_at_territory_border
-                else movement.go_up_left()
-            ),
-            self._direction.SouthEast: (
-                movement.go_up_left()
-                if is_at_territory_border
-                else movement.go_down_right()
-            ),
-            self._direction.SouthWest: (
-                movement.go_up_right()
-                if is_at_territory_border
-                else movement.go_down_left()
-            ),
-            self._direction.North: (
-                movement.go_down() if is_at_territory_border else movement.go_up()
-            ),
-            self._direction.South: (
-                movement.go_up() if is_at_territory_border else movement.go_down()
-            ),
-            self._direction.East: (
-                movement.go_left() if is_at_territory_border else movement.go_right()
-            ),
-            self._direction.West: (
-                movement.go_right() if is_at_territory_border else movement.go_left()
-            ),
-        }
-        return directions.get(self._direction)
+        new_position = (
+            directions[self._direction.opposite()]
+            if is_at_territory_border
+            else directions[self._direction]
+        )
+        return new_position
 
     def is_colliding_with(self, flying_object: FlyingObject) -> bool:
         return self._position == flying_object.current_position()
