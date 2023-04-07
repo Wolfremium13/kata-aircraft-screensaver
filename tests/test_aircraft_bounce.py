@@ -1,4 +1,3 @@
-from unittest import TestCase
 import pytest
 from assertpy import assert_that
 
@@ -54,6 +53,7 @@ TERRITORY_WITH_LONGITUDE = Territory(max_longitude=5, max_latitude=0)
 TERRITORY_WITH_LATITUDE = Territory(max_longitude=0, max_latitude=5)
 AIRCRAFT_POSITION_WITH_LONGITUDE = Position(longitude=1, latitude=0)
 AIRCRAFT_POSITION_WITH_LATITUDE = Position(longitude=0, latitude=1)
+
 
 @pytest.mark.parametrize(
     "aircraft_position,direction,expected_position,territory",
