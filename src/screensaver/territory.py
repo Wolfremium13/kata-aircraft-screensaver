@@ -17,23 +17,61 @@ class Territory:
         self.flying_objects.append(flying_object)
         # Proposal: handle the case of registering a collision
 
-    def is_at_border(self, position: Position, direction: Direction) -> bool:
+    def change_direction_based_on_border(
+        self, position: Position, direction: Direction
+    ) -> Direction:
         directions = {
-            direction.North: self._at_northern_border(position),
-            direction.South: self._at_southern_border(position),
-            direction.East: self._at_eastern_border(position),
-            direction.West: self._at_western_border(position),
+            direction.North: (
+                direction.North
+                if not self._at_northern_border(position)
+                else direction.opposite()
+            ),
+            direction.South: (
+                direction.South
+                if not self._at_southern_border(position)
+                else direction.opposite()
+            ),
+            direction.East: (
+                direction.East
+                if not self._at_eastern_border(position)
+                else direction.opposite()
+            ),
+            direction.West: (
+                direction.West
+                if not self._at_western_border(position)
+                else direction.opposite()
+            ),
             direction.NorthEast: (
-                self._at_northern_border(position) and self._at_eastern_border(position)
+                direction.NorthEast
+                if not (
+                    self._at_northern_border(position)
+                    and self._at_eastern_border(position)
+                )
+                else direction.opposite()
             ),
             direction.NorthWest: (
-                self._at_northern_border(position) and self._at_western_border(position)
+                direction.NorthWest
+                if not (
+                    self._at_northern_border(position)
+                    and self._at_western_border(position)
+                )
+                else direction.opposite()
             ),
             direction.SouthEast: (
-                self._at_southern_border(position) and self._at_eastern_border(position)
+                direction.SouthEast
+                if not (
+                    self._at_southern_border(position)
+                    and self._at_eastern_border(position)
+                )
+                else direction.opposite()
             ),
             direction.SouthWest: (
-                self._at_southern_border(position) and self._at_western_border(position)
+                direction.SouthWest
+                if not (
+                    self._at_southern_border(position)
+                    and self._at_western_border(position)
+                )
+                else direction.opposite()
             ),
         }
         return directions.get(direction)
