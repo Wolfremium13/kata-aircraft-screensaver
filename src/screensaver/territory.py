@@ -59,6 +59,16 @@ class Territory:
                     self._at_southern_border(position)
                     and self._at_eastern_border(position)
                 )
+                else direction.East
+                if (
+                    self._at_southern_border(position)
+                    and not self._at_eastern_border(position)
+                )
+                else direction.South
+                if (
+                    self._at_eastern_border(position)
+                    and not self._at_southern_border(position)
+                )
                 else direction
             ),
             direction.SouthWest: (

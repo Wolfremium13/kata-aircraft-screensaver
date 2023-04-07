@@ -49,8 +49,8 @@ def test_bounce_back_at_the_ordinal_territory_borders(
     assert_that(an_aircraft.current_position()).is_equal_to(expected_position)
 
 
-TERRITORY_WITH_LONGITUDE = Territory(max_longitude=10, max_latitude=0)
-TERRITORY_WITH_LATITUDE = Territory(max_longitude=0, max_latitude=10)
+TERRITORY_WITH_LONGITUDE = Territory(max_longitude=1, max_latitude=0)
+TERRITORY_WITH_LATITUDE = Territory(max_longitude=0, max_latitude=1)
 
 
 @pytest.mark.parametrize(
