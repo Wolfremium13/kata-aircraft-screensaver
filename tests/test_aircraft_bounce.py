@@ -1,3 +1,4 @@
+from unittest import TestCase
 import pytest
 from assertpy import assert_that
 
@@ -49,49 +50,58 @@ def test_bounce_back_at_the_ordinal_territory_borders(
     assert_that(an_aircraft.current_position()).is_equal_to(expected_position)
 
 
-TERRITORY_WITH_LONGITUDE = Territory(max_longitude=1, max_latitude=0)
-TERRITORY_WITH_LATITUDE = Territory(max_longitude=0, max_latitude=1)
-
+TERRITORY_WITH_LONGITUDE = Territory(max_longitude=5, max_latitude=0)
+TERRITORY_WITH_LATITUDE = Territory(max_longitude=0, max_latitude=5)
+AIRCRAFT_POSITION_WITH_LONGITUDE = Position(longitude=1, latitude=0)
+AIRCRAFT_POSITION_WITH_LATITUDE = Position(longitude=0, latitude=1)
 
 @pytest.mark.parametrize(
-    "direction,expected_position,territory",
+    "aircraft_position,direction,expected_position,territory",
     [
         (
+            AIRCRAFT_POSITION_WITH_LATITUDE,
             Direction.NorthWest,
-            Movement(AIRCRAFT_POSITION).go_up(),
+            Movement(AIRCRAFT_POSITION_WITH_LATITUDE).go_up(),
             TERRITORY_WITH_LATITUDE,
         ),
         (
+            AIRCRAFT_POSITION_WITH_LONGITUDE,
             Direction.NorthWest,
-            Movement(AIRCRAFT_POSITION).go_left(),
+            Movement(AIRCRAFT_POSITION_WITH_LONGITUDE).go_left(),
             TERRITORY_WITH_LONGITUDE,
         ),
         (
+            AIRCRAFT_POSITION_WITH_LATITUDE,
             Direction.SouthWest,
-            Movement(AIRCRAFT_POSITION).go_down(),
+            Movement(AIRCRAFT_POSITION_WITH_LATITUDE).go_down(),
             TERRITORY_WITH_LATITUDE,
         ),
         (
+            AIRCRAFT_POSITION_WITH_LONGITUDE,
             Direction.SouthWest,
-            Movement(AIRCRAFT_POSITION).go_left(),
+            Movement(AIRCRAFT_POSITION_WITH_LONGITUDE).go_left(),
             TERRITORY_WITH_LONGITUDE,
         ),
         (
+            AIRCRAFT_POSITION,
             Direction.SouthEast,
             Movement(AIRCRAFT_POSITION).go_down(),
             TERRITORY_WITH_LATITUDE,
         ),
         (
+            AIRCRAFT_POSITION,
             Direction.SouthEast,
             Movement(AIRCRAFT_POSITION).go_right(),
             TERRITORY_WITH_LONGITUDE,
         ),
         (
+            AIRCRAFT_POSITION_WITH_LATITUDE,
             Direction.NorthEast,
-            Movement(AIRCRAFT_POSITION).go_up(),
+            Movement(AIRCRAFT_POSITION_WITH_LATITUDE).go_up(),
             TERRITORY_WITH_LATITUDE,
         ),
         (
+            AIRCRAFT_POSITION,
             Direction.NorthEast,
             Movement(AIRCRAFT_POSITION).go_right(),
             TERRITORY_WITH_LONGITUDE,
@@ -99,9 +109,12 @@ TERRITORY_WITH_LATITUDE = Territory(max_longitude=0, max_latitude=1)
     ],
 )
 def test_bounce_diagonally_at_the_cardinal_territory_borders(
-    direction: Direction, expected_position: Position, territory: Territory
+    aircraft_position: Position,
+    direction: Direction,
+    expected_position: Position,
+    territory: Territory,
 ):
-    an_aircraft = Aircraft.create(AIRCRAFT_POSITION, territory)
+    an_aircraft = Aircraft.create(aircraft_position, territory)
 
     an_aircraft.move(direction)
 

@@ -43,6 +43,16 @@ class Territory:
                     self._at_northern_border(position)
                     and self._at_eastern_border(position)
                 )
+                else direction.East
+                if (
+                    self._at_northern_border(position)
+                    and not self._at_eastern_border(position)
+                )
+                else direction.North
+                if (
+                    self._at_eastern_border(position)
+                    and not self._at_northern_border(position)
+                )
                 else direction
             ),
             direction.NorthWest: (
@@ -50,6 +60,16 @@ class Territory:
                 if (
                     self._at_northern_border(position)
                     and self._at_western_border(position)
+                )
+                else direction.West
+                if (
+                    self._at_northern_border(position)
+                    and not self._at_western_border(position)
+                )
+                else direction.North
+                if (
+                    self._at_western_border(position)
+                    and not self._at_northern_border(position)
                 )
                 else direction
             ),
@@ -76,6 +96,16 @@ class Territory:
                 if (
                     self._at_southern_border(position)
                     and self._at_western_border(position)
+                )
+                else direction.West
+                if (
+                    self._at_southern_border(position)
+                    and not self._at_western_border(position)
+                )
+                else direction.South
+                if (
+                    self._at_western_border(position)
+                    and not self._at_southern_border(position)
                 )
                 else direction
             ),
