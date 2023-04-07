@@ -14,14 +14,14 @@ AIRCRAFT_POSITION = Position(longitude=5, latitude=5)
 @pytest.mark.parametrize(
     "direction,expected_position",
     [
-        (Direction.North, Movement(AIRCRAFT_POSITION).go_up),
-        (Direction.South, Movement(AIRCRAFT_POSITION).go_down),
-        (Direction.East, Movement(AIRCRAFT_POSITION).go_right),
-        (Direction.West, Movement(AIRCRAFT_POSITION).go_left),
-        (Direction.NorthEast, Movement(AIRCRAFT_POSITION).go_up_right),
-        (Direction.NorthWest, Movement(AIRCRAFT_POSITION).go_up_left),
-        (Direction.SouthEast, Movement(AIRCRAFT_POSITION).go_down_right),
-        (Direction.SouthWest, Movement(AIRCRAFT_POSITION).go_down_left),
+        (Direction.North, Movement(AIRCRAFT_POSITION).go_up()),
+        (Direction.South, Movement(AIRCRAFT_POSITION).go_down()),
+        (Direction.East, Movement(AIRCRAFT_POSITION).go_right()),
+        (Direction.West, Movement(AIRCRAFT_POSITION).go_left()),
+        (Direction.NorthEast, Movement(AIRCRAFT_POSITION).go_up_right()),
+        (Direction.NorthWest, Movement(AIRCRAFT_POSITION).go_up_left()),
+        (Direction.SouthEast, Movement(AIRCRAFT_POSITION).go_down_right()),
+        (Direction.SouthWest, Movement(AIRCRAFT_POSITION).go_down_left()),
     ],
 )
 def test_aircraft_moves_based_on_a_certain_direction_should(

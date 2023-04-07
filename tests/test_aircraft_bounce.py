@@ -14,10 +14,10 @@ AIRCRAFT_POSITION = Position(longitude=0, latitude=0)
 @pytest.mark.parametrize(
     "direction,expected_position",
     [
-        (Direction.North, Movement(AIRCRAFT_POSITION).go_down),
-        (Direction.South, Movement(AIRCRAFT_POSITION).go_up),
-        (Direction.East, Movement(AIRCRAFT_POSITION).go_left),
-        (Direction.West, Movement(AIRCRAFT_POSITION).go_right),
+        (Direction.North, Movement(AIRCRAFT_POSITION).go_down()),
+        (Direction.South, Movement(AIRCRAFT_POSITION).go_up()),
+        (Direction.East, Movement(AIRCRAFT_POSITION).go_left()),
+        (Direction.West, Movement(AIRCRAFT_POSITION).go_right()),
     ],
 )
 def test_bounce_back_at_the_cardinal_territory_borders(
@@ -33,10 +33,10 @@ def test_bounce_back_at_the_cardinal_territory_borders(
 @pytest.mark.parametrize(
     "direction,expected_position",
     [
-        (Direction.NorthWest, Movement(AIRCRAFT_POSITION).go_down_right),
-        (Direction.SouthWest, Movement(AIRCRAFT_POSITION).go_up_right),
-        (Direction.NorthEast, Movement(AIRCRAFT_POSITION).go_down_left),
-        (Direction.SouthEast, Movement(AIRCRAFT_POSITION).go_up_left),
+        (Direction.NorthWest, Movement(AIRCRAFT_POSITION).go_down_right()),
+        (Direction.SouthWest, Movement(AIRCRAFT_POSITION).go_up_right()),
+        (Direction.NorthEast, Movement(AIRCRAFT_POSITION).go_down_left()),
+        (Direction.SouthEast, Movement(AIRCRAFT_POSITION).go_up_left()),
     ],
 )
 def test_bounce_back_at_the_ordinal_territory_borders(

@@ -38,36 +38,36 @@ class Aircraft(FlyingObject):
         )
         directions = {
             self._direction.NorthEast: (
-                movement.go_down_left
+                movement.go_down_left()
                 if is_at_territory_border
-                else movement.go_up_right
+                else movement.go_up_right()
             ),
             self._direction.NorthWest: (
-                movement.go_down_right
+                movement.go_down_right()
                 if is_at_territory_border
-                else movement.go_up_left
+                else movement.go_up_left()
             ),
             self._direction.SouthEast: (
-                movement.go_up_left
+                movement.go_up_left()
                 if is_at_territory_border
-                else movement.go_down_right
+                else movement.go_down_right()
             ),
             self._direction.SouthWest: (
-                movement.go_up_right
+                movement.go_up_right()
                 if is_at_territory_border
-                else movement.go_down_left
+                else movement.go_down_left()
             ),
             self._direction.North: (
-                movement.go_down if is_at_territory_border else movement.go_up
+                movement.go_down() if is_at_territory_border else movement.go_up()
             ),
             self._direction.South: (
-                movement.go_up if is_at_territory_border else movement.go_down
+                movement.go_up() if is_at_territory_border else movement.go_down()
             ),
             self._direction.East: (
-                movement.go_left if is_at_territory_border else movement.go_right
+                movement.go_left() if is_at_territory_border else movement.go_right()
             ),
             self._direction.West: (
-                movement.go_right if is_at_territory_border else movement.go_left
+                movement.go_right() if is_at_territory_border else movement.go_left()
             ),
         }
         return directions.get(self._direction)
