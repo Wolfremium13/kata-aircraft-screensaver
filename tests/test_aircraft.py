@@ -53,17 +53,13 @@ class AircraftTerritoryShould(TestCase):
 
         assert_that(self.territory.get_flying_objects()).is_empty()
 
-    def test_aircraft_explote_and_disappear_when_they_are_registered_with_another_aircraft_at_the_same_place(
+    def test_aircraft_cannot_be_registered_with_another_aircraft_at_the_same_place(
         self,
     ):
-        Aircraft.create(Position(longitude=3, latitude=1), self.territory)
-        another_aircraft = Aircraft.create(
-            Position(longitude=4, latitude=1), self.territory
-        )
+        Aircraft.create(Position(), self.territory)
+        another_aircraft = Aircraft.create(Position(), self.territory)
 
-        another_aircraft.move(Direction.West)
-
-        assert_that(self.territory.get_flying_objects()).is_empty()
+        assert_that(another_aircraft).is_instance_of(ValidationError)
 
     def test_there_could_be_many_flying_objects_in_the_territory(self):
         territory = Territory(max_longitude=6, max_latitude=6)
@@ -250,9 +246,9 @@ class BounceShould(TestCase):
             ),
             (
                 f"{Direction.SouthEast}",
-                AIRCRAFT_DEFAULT_POSITION,
+                AIRCRAFT_POSITION_WITH_LONGITUDE,
                 Direction.SouthEast,
-                Movement(AIRCRAFT_DEFAULT_POSITION).go_right(),
+                Movement(AIRCRAFT_POSITION_WITH_LONGITUDE).go_right(),
                 TERRITORY_WITH_LONGITUDE,
             ),
             (
@@ -279,6 +275,7 @@ class BounceShould(TestCase):
         expected_position: Position,
         territory: Territory,
     ):
+        territory.flying_objects.clear()
         an_aircraft = Aircraft.create(aircraft_position, territory)
 
         an_aircraft.move(direction)

@@ -63,6 +63,9 @@ class Aircraft(FlyingObject):
         ):
             return ValidationError("The position cant be out of the territory")
 
+        if position in [p.current_position() for p in territory.get_flying_objects()]:
+            return ValidationError("The position is already occupied")
+
         aircraft = Aircraft(position, territory, direction)
         territory.register(aircraft)
         return aircraft
