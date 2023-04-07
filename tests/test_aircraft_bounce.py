@@ -108,7 +108,7 @@ AIRCRAFT_POSITION_WITH_LATITUDE = Position(longitude=0, latitude=1)
         ),
     ],
 )
-def test_bounce_diagonally_at_the_cardinal_territory_borders(
+def test_bounce_diagonally_at_the_cardinal_territory_borders_when_direction_its_ordinarily(
     aircraft_position: Position,
     direction: Direction,
     expected_position: Position,
