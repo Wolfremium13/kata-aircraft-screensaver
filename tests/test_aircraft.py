@@ -143,14 +143,30 @@ class BounceShould(TestCase):
 
     @parameterized.expand(
         [
-            (Direction.North, Movement(AIRCRAFT_DEFAULT_POSITION).go_down()),
-            (Direction.South, Movement(AIRCRAFT_DEFAULT_POSITION).go_up()),
-            (Direction.East, Movement(AIRCRAFT_DEFAULT_POSITION).go_left()),
-            (Direction.West, Movement(AIRCRAFT_DEFAULT_POSITION).go_right()),
+            (
+                f"{Direction.North}",
+                Direction.North,
+                Movement(AIRCRAFT_DEFAULT_POSITION).go_down(),
+            ),
+            (
+                f"{Direction.South}",
+                Direction.South,
+                Movement(AIRCRAFT_DEFAULT_POSITION).go_up(),
+            ),
+            (
+                f"{Direction.East}",
+                Direction.East,
+                Movement(AIRCRAFT_DEFAULT_POSITION).go_left(),
+            ),
+            (
+                f"{Direction.West}",
+                Direction.West,
+                Movement(AIRCRAFT_DEFAULT_POSITION).go_right(),
+            ),
         ],
     )
     def test_bounce_back_at_the_cardinal_territory_borders(
-        self, direction: Direction, expected_position: Position
+        self, _, direction: Direction, expected_position: Position
     ):
         an_aircraft = Aircraft.create(
             self.AIRCRAFT_DEFAULT_POSITION, self.TERRITORY_EMPTY
