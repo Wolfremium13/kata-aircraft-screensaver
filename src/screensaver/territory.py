@@ -23,14 +23,18 @@ class Territory:
             direction.South: self._at_southern_border(position),
             direction.East: self._at_eastern_border(position),
             direction.West: self._at_western_border(position),
-            direction.NorthEast: self._at_northern_border(position)
-            and self._at_eastern_border(position),
-            direction.NorthWest: self._at_northern_border(position)
-            and self._at_western_border(position),
-            direction.SouthEast: self._at_southern_border(position)
-            and self._at_eastern_border(position),
-            direction.SouthWest: self._at_southern_border(position)
-            and self._at_western_border(position),
+            direction.NorthEast: (
+                self._at_northern_border(position) and self._at_eastern_border(position)
+            ),
+            direction.NorthWest: (
+                self._at_northern_border(position) and self._at_western_border(position)
+            ),
+            direction.SouthEast: (
+                self._at_southern_border(position) and self._at_eastern_border(position)
+            ),
+            direction.SouthWest: (
+                self._at_southern_border(position) and self._at_western_border(position)
+            ),
         }
         return directions.get(direction)
 
