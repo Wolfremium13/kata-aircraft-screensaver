@@ -28,3 +28,22 @@ def test_bounce_back_at_the_cardinal_territory_borders(
     an_aircraft.move(direction)
 
     assert_that(an_aircraft.current_position()).is_equal_to(expected_position)
+
+
+@pytest.mark.parametrize(
+    "direction,expected_position",
+    [
+        (Direction.NorthWest, Movement(AIRCRAFT_POSITION).go_down_right),
+        (Direction.SouthWest, Movement(AIRCRAFT_POSITION).go_up_right),
+        (Direction.NorthEast, Movement(AIRCRAFT_POSITION).go_down_left),
+        (Direction.SouthEast, Movement(AIRCRAFT_POSITION).go_up_left),
+    ],
+)
+def test_bounce_back_at_the_ordinal_territory_borders(
+    direction: Direction, expected_position: Position
+):
+    an_aircraft = Aircraft.create(AIRCRAFT_POSITION, TERRITORY)
+
+    an_aircraft.move(direction)
+
+    assert_that(an_aircraft.current_position()).is_equal_to(expected_position)
