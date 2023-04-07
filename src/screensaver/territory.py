@@ -22,56 +22,52 @@ class Territory:
     ) -> Direction:
         directions = {
             direction.North: (
-                direction.North
-                if not self._at_northern_border(position)
-                else direction.opposite()
+                direction.opposite()
+                if self._at_northern_border(position)
+                else direction
             ),
             direction.South: (
-                direction.South
-                if not self._at_southern_border(position)
-                else direction.opposite()
+                direction.opposite()
+                if self._at_southern_border(position)
+                else direction
             ),
             direction.East: (
-                direction.East
-                if not self._at_eastern_border(position)
-                else direction.opposite()
+                direction.opposite() if self._at_eastern_border(position) else direction
             ),
             direction.West: (
-                direction.West
-                if not self._at_western_border(position)
-                else direction.opposite()
+                direction.opposite() if self._at_western_border(position) else direction
             ),
             direction.NorthEast: (
-                direction.NorthEast
-                if not (
+                direction.opposite()
+                if (
                     self._at_northern_border(position)
                     and self._at_eastern_border(position)
                 )
-                else direction.opposite()
+                else direction
             ),
             direction.NorthWest: (
-                direction.NorthWest
-                if not (
+                direction.opposite()
+                if (
                     self._at_northern_border(position)
                     and self._at_western_border(position)
                 )
-                else direction.opposite()
+                else direction
             ),
             direction.SouthEast: (
-                direction.SouthEast
-                if not (
+                direction.opposite()
+                if (
                     self._at_southern_border(position)
                     and self._at_eastern_border(position)
                 )
-                else direction.opposite()
+                else direction
             ),
             direction.SouthWest: (
-                direction.SouthWest
-                if not (
+                direction.opposite()
+                if (
                     self._at_southern_border(position)
                     and self._at_western_border(position)
                 )
-                else direction.opposite()
+                else direction
             ),
         }
         return directions.get(direction)
