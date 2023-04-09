@@ -32,6 +32,7 @@ class Aircraft(FlyingObject):
             self._direction = new_direction
 
     def _get_new_position_from_direction(self) -> Position:
+        # Movement methods should be in the position class
         move = Movement(self._position)
         movements = {
             self._direction.NorthEast: move.go_up_right(),
