@@ -16,6 +16,10 @@ tests:  ## Locally run tests
 	$(PIPENV) clean
 	$(PIPENV_SAFE_RUN) pytest --verbose
 
+.PHONY: run-ui
+run-ui:  ## Run the UI
+	@PYTHONPATH=src PIPENV_VERBOSITY=-1 pipenv run python -m src.ui
+
 .PHONY: lint
 lint:   ## Lint the project files
 	@echo "🌑 Formatting with black"
