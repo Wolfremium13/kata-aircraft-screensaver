@@ -4,7 +4,6 @@ from assertpy import assert_that
 
 from src.screensaver.aircraft import Aircraft
 from src.screensaver.direction import Direction
-from src.screensaver.movement import Movement
 from src.screensaver.position import Position
 from src.screensaver.territory import Territory
 
@@ -31,7 +30,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.North)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.initial_position).go_down()
+            self.initial_position.go_down()
         )
 
     def test_bounce_back_at_the_south_territory_border(self):
@@ -40,7 +39,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.South)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.initial_position).go_up()
+            self.initial_position.go_up()
         )
 
     def test_bounce_back_at_the_east_territory_border(self):
@@ -49,7 +48,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.East)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.initial_position).go_left()
+            self.initial_position.go_left()
         )
 
     def test_bounce_back_at_the_west_territory_border(self):
@@ -58,7 +57,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.West)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.initial_position).go_right()
+            self.initial_position.go_right()
         )
 
     def test_bounce_back_at_the_north_west_territory_border(self):
@@ -67,7 +66,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.NorthWest)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.initial_position).go_down_right()
+            self.initial_position.go_down_right()
         )
 
     def test_bounce_back_at_the_north_east_territory_border(self):
@@ -76,7 +75,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.NorthEast)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.initial_position).go_down_left()
+            self.initial_position.go_down_left()
         )
 
     def test_bounce_back_at_the_south_west_territory_border(self):
@@ -85,7 +84,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.SouthWest)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.initial_position).go_up_right()
+            self.initial_position.go_up_right()
         )
 
     def test_bounce_back_at_the_south_east_territory_border(self):
@@ -94,7 +93,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.SouthEast)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.initial_position).go_up_left()
+            self.initial_position.go_up_left()
         )
 
     def test_bounce_diagonally_at_the_north_territory_border_when_direction_its_north_west_and_have_latitude_in_territory(
@@ -107,7 +106,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.NorthWest)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.aircraft_position_with_latitude).go_up()
+            self.aircraft_position_with_latitude.go_up()
         )
 
     def test_bounce_diagonally_at_the_north_territory_border_when_direction_its_north_west_and_have_longitude_in_territory(
@@ -120,7 +119,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.NorthWest)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.aircraft_position_with_longitude).go_left()
+            self.aircraft_position_with_longitude.go_left()
         )
 
     def test_bounce_diagonally_at_the_south_territory_border_when_direction_its_south_west_and_have_latitude_in_territory(
@@ -133,7 +132,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.SouthWest)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.aircraft_position_with_latitude).go_down()
+            self.aircraft_position_with_latitude.go_down()
         )
 
     def test_bounce_diagonally_at_the_south_territory_border_when_direction_its_south_west_and_have_longitude_in_territory(
@@ -146,7 +145,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.SouthWest)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.aircraft_position_with_longitude).go_left()
+            self.aircraft_position_with_longitude.go_left()
         )
 
     def test_bounce_diagonally_at_the_south_territory_border_when_direction_its_south_east_and_have_latitude_in_territory(
@@ -159,7 +158,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.SouthEast)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.aircraft_position_with_latitude).go_down()
+            self.aircraft_position_with_latitude.go_down()
         )
 
     def test_bounce_diagonally_at_the_south_territory_border_when_direction_its_south_east_and_have_longitude_in_territory(
@@ -172,7 +171,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.SouthEast)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.aircraft_position_with_longitude).go_right()
+            self.aircraft_position_with_longitude.go_right()
         )
 
     def test_bounce_diagonally_at_the_north_territory_border_when_direction_its_north_east_and_have_latitude_in_territory(
@@ -185,7 +184,7 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.NorthEast)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.aircraft_position_with_latitude).go_up()
+            self.aircraft_position_with_latitude.go_up()
         )
 
     def test_bounce_diagonally_at_the_north_territory_border_when_direction_its_north_east_and_have_longitude_in_territory(
@@ -198,5 +197,5 @@ class BounceShould(TestCase):
         an_aircraft.move(Direction.NorthEast)
 
         assert_that(an_aircraft.current_position()).is_equal_to(
-            Movement(self.aircraft_position_with_longitude).go_right()
+            self.aircraft_position_with_longitude.go_right()
         )

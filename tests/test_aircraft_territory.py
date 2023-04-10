@@ -4,7 +4,6 @@ from assertpy import assert_that
 
 from src.screensaver.aircraft import Aircraft
 from src.screensaver.direction import Direction
-from src.screensaver.movement import Movement
 from src.screensaver.position import Position
 from src.screensaver.territory import Territory
 from src.screensaver.validation_error import ValidationError
@@ -39,8 +38,8 @@ class AircraftTerritoryShould(TestCase):
         an_aircraft.move()
         an_aircraft.move()
 
-        first_move_position = Movement(self.initial_position).go_up()
-        second_move_position = Movement(first_move_position).go_up()
+        first_move_position = self.initial_position.go_up()
+        second_move_position = first_move_position.go_up()
         assert_that(an_aircraft.current_position()).is_equal_to(second_move_position)
 
     def test_aircraft_explote_and_disappear_when_they_collide_with_another_aircraft(
@@ -48,7 +47,7 @@ class AircraftTerritoryShould(TestCase):
     ):
         Aircraft.create(self.initial_position, self.territory)
         another_aircraft = Aircraft.create(
-            Movement(self.initial_position).go_right(), self.territory
+            self.initial_position.go_right(), self.territory
         )
 
         another_aircraft.move(Direction.West)
@@ -66,7 +65,7 @@ class AircraftTerritoryShould(TestCase):
     def test_there_could_be_many_flying_objects_in_the_territory(self):
         number_of_aircraft = 2
         Aircraft.create(self.initial_position, self.territory)
-        Aircraft.create(Movement(self.initial_position).go_down_right(), self.territory)
+        Aircraft.create(self.initial_position.go_down_right(), self.territory)
 
         assert_that(len(self.territory.get_flying_objects())).is_equal_to(
             number_of_aircraft

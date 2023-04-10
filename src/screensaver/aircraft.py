@@ -2,7 +2,6 @@ from typing import Union
 
 from src.screensaver.direction import Direction
 from src.screensaver.flying_object import FlyingObject
-from src.screensaver.movement import Movement
 from src.screensaver.position import Position
 from src.screensaver.territory import Territory
 from src.screensaver.validation_error import ValidationError
@@ -33,16 +32,15 @@ class Aircraft(FlyingObject):
 
     def _get_new_position_from_direction(self) -> Position:
         # Movement methods should be in the position class
-        move = Movement(self._position)
         movements = {
-            self._direction.NorthEast: move.go_up_right(),
-            self._direction.NorthWest: move.go_up_left(),
-            self._direction.SouthEast: move.go_down_right(),
-            self._direction.SouthWest: move.go_down_left(),
-            self._direction.North: move.go_up(),
-            self._direction.South: move.go_down(),
-            self._direction.East: move.go_right(),
-            self._direction.West: move.go_left(),
+            self._direction.NorthEast: self._position.go_up_right(),
+            self._direction.NorthWest: self._position.go_up_left(),
+            self._direction.SouthEast: self._position.go_down_right(),
+            self._direction.SouthWest: self._position.go_down_left(),
+            self._direction.North: self._position.go_up(),
+            self._direction.South: self._position.go_down(),
+            self._direction.East: self._position.go_right(),
+            self._direction.West: self._position.go_left(),
         }
 
         direction = self._territory.change_direction_based_on_border(
