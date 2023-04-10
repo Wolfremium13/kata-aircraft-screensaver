@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "89dc8116e09d8ef1688e21b3cf9b610517e13dc8b632f62b6ddee62d2c1d7950"
+            "sha256": "0ec2c183bb9f0068b3171a98baf34ce77b263cd25a7b8ccd1da857a8f27b086b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -15,7 +15,24 @@
             }
         ]
     },
-    "default": {},
+    "default": {
+        "pysimplegui": {
+            "hashes": [
+                "sha256:e133fbd21779f0f125cebbc2a4e1f5a931a383738661013ff33ad525d5611eda",
+                "sha256:f88c82c301a51aea35be605dc060bcceb0dcb6682e16280544884701ab4b23ba"
+            ],
+            "index": "pypi",
+            "version": "==4.60.4"
+        },
+        "tk": {
+            "hashes": [
+                "sha256:60bc8923d5d35f67f5c6bd93d4f0c49d2048114ec077768f959aef36d4ed97f8",
+                "sha256:703a69ff0d5ba2bd2f7440582ad10160e4a6561595d33457dc6caa79b9bf4930"
+            ],
+            "index": "pypi",
+            "version": "==0.1.0"
+        }
+    },
     "develop": {
         "assertpy": {
             "hashes": [
@@ -136,11 +153,11 @@
         },
         "hypothesis": {
             "hashes": [
-                "sha256:91869c4a29a04e812f677ded7e692c7e37514239e9137d21e3567fa4e1348c02",
-                "sha256:a8d1d96ae2214f8ca4b8109d555df08e1eb5c31dd7e3995e53413c7094f74dcc"
+                "sha256:06235b8ab3c4090bec96b07dfc2347611c1392e5b4ffa48c069f2c1337968725",
+                "sha256:b2c3bbead72189c0bba6e12848b484ceafadb6e872ac31e40013228239366221"
             ],
             "index": "pypi",
-            "version": "==6.70.2"
+            "version": "==6.71.0"
         },
         "iniconfig": {
             "hashes": [
@@ -263,11 +280,11 @@
         },
         "pytest": {
             "hashes": [
-                "sha256:130328f552dcfac0b1cec75c12e3f005619dc5f874f0a06e8ff7263f0ee6225e",
-                "sha256:c99ab0c73aceb050f68929bc93af19ab6db0558791c6a0715723abe9d0ade9d4"
+                "sha256:58ecc27ebf0ea643ebfdf7fb1249335da761a00c9f955bcd922349bcb68ee57d",
+                "sha256:933051fa1bfbd38a21e73c3960cebdad4cf59483ddba7696c48509727e17f201"
             ],
             "index": "pypi",
-            "version": "==7.2.2"
+            "version": "==7.3.0"
         },
         "pytest-cov": {
             "hashes": [

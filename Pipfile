@@ -4,6 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+pysimplegui = "*"
+tk = "*"
 
 [dev-packages]
 assertpy = "1.1"
