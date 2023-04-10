@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from src.screensaver.direction import Direction
 from src.screensaver.flying_object import FlyingObject
@@ -17,97 +17,101 @@ class Territory:
         self.flying_objects.append(flying_object)
         # Proposal: handle the case of registering a collision
 
-    def change_direction_based_on_border(
+    def get_position_and_direction_based_on_borders(
         self, position: Position, direction: Direction
-    ) -> Direction:
+    ) -> Tuple[Direction, Position]:
         directions = {
             direction.North: (
-                direction.opposite()
+                (direction.opposite(), position.go_down())
                 if self._at_northern_border(position)
-                else direction
+                else (direction, position.go_up())
             ),
             direction.South: (
-                direction.opposite()
+                (direction.opposite(), position.go_up())
                 if self._at_southern_border(position)
-                else direction
+                else (direction, position.go_down())
             ),
             direction.East: (
-                direction.opposite() if self._at_eastern_border(position) else direction
+                (direction.opposite(), position.go_left())
+                if self._at_eastern_border(position)
+                else (direction, position.go_right())
             ),
             direction.West: (
-                direction.opposite() if self._at_western_border(position) else direction
+                (direction.opposite(), position.go_right())
+                if self._at_western_border(position)
+                else (direction, position.go_left())
             ),
             direction.NorthEast: (
-                direction.opposite()
+                (direction.opposite(), position.go_down_left())
                 if (
                     self._at_northern_border(position)
                     and self._at_eastern_border(position)
                 )
-                else direction.East
+                else (direction.SouthEast, position.go_right())
                 if (
                     self._at_northern_border(position)
                     and not self._at_eastern_border(position)
                 )
-                else direction.North
+                else (direction.SouthWest, position.go_up())
                 if (
                     self._at_eastern_border(position)
                     and not self._at_northern_border(position)
                 )
-                else direction
+                else (direction, position.go_up_right())
             ),
             direction.NorthWest: (
-                direction.opposite()
+                (direction.opposite(), position.go_down_right())
                 if (
                     self._at_northern_border(position)
                     and self._at_western_border(position)
                 )
-                else direction.West
+                else (direction.SouthWest, position.go_left())
                 if (
                     self._at_northern_border(position)
                     and not self._at_western_border(position)
                 )
-                else direction.North
+                else (direction.NorthEast, position.go_up())
                 if (
                     self._at_western_border(position)
                     and not self._at_northern_border(position)
                 )
-                else direction
+                else (direction, position.go_up_left())
             ),
             direction.SouthEast: (
-                direction.opposite()
+                (direction.opposite(), position.go_up_left())
                 if (
                     self._at_southern_border(position)
                     and self._at_eastern_border(position)
                 )
-                else direction.East
+                else (direction.NorthEast, position.go_right())
                 if (
                     self._at_southern_border(position)
                     and not self._at_eastern_border(position)
                 )
-                else direction.South
+                else (direction.SouthWest, position.go_down())
                 if (
                     self._at_eastern_border(position)
                     and not self._at_southern_border(position)
                 )
-                else direction
+                else (direction, position.go_down_right())
             ),
             direction.SouthWest: (
-                direction.opposite()
+                (direction.opposite(), position.go_up_right())
                 if (
                     self._at_southern_border(position)
                     and self._at_western_border(position)
                 )
-                else direction.West
+                else (direction.NorthWest, position.go_left())
                 if (
                     self._at_southern_border(position)
                     and not self._at_western_border(position)
                 )
-                else direction.South
+                else (direction.SouthEast, position.go_down())
                 if (
                     self._at_western_border(position)
                     and not self._at_southern_border(position)
                 )
-                else direction
+                else (direction, position.go_down_left())
             ),
         }
         return directions.get(direction)

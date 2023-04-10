@@ -21,33 +21,18 @@ class Aircraft(FlyingObject):
     def current_position(self) -> Position:
         return self._position.copy()
 
-    def move(self, new_direction: Direction = None) -> None:
-        self._assign_new_direction(new_direction)
-        self._position = self._get_new_position_from_direction()
-        self._territory.update_position(self)
+    def current_direction(self) -> Direction:
+        return self._direction
 
-    def _assign_new_direction(self, new_direction: Direction) -> None:
-        if new_direction:
-            self._direction = new_direction
-
-    def _get_new_position_from_direction(self) -> Position:
-        # Movement methods should be in the position class
-        movements = {
-            self._direction.NorthEast: self._position.go_up_right(),
-            self._direction.NorthWest: self._position.go_up_left(),
-            self._direction.SouthEast: self._position.go_down_right(),
-            self._direction.SouthWest: self._position.go_down_left(),
-            self._direction.North: self._position.go_up(),
-            self._direction.South: self._position.go_down(),
-            self._direction.East: self._position.go_right(),
-            self._direction.West: self._position.go_left(),
-        }
-
-        direction = self._territory.change_direction_based_on_border(
-            self._position, self._direction
+    def move(self, given_direction: Direction = None) -> None:
+        direction = given_direction or self._direction
+        (
+            self._direction,
+            self._position,
+        ) = self._territory.get_position_and_direction_based_on_borders(
+            self._position, direction
         )
-        # Check if the direction is valid after bounce?
-        return movements[direction]
+        self._territory.update_position(self)
 
     def is_colliding_with(self, flying_object: FlyingObject) -> bool:
         return self._position == flying_object.current_position()
