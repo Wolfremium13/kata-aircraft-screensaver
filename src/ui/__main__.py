@@ -8,7 +8,7 @@ from screensaver.position import Position
 from screensaver.territory import Territory
 
 # TODO: review https://www.pysimplegui.org/en/latest/readme/#layouts-are-funny-lol
-TERRITORY = Territory(max_latitude=10, max_longitude=10)
+TERRITORY = Territory(max_latitude=11, max_longitude=11)
 CELL_SIZE = 50
 WINDOW_SIZE = (800, 600)
 WINDOW_COLOR = "white"
@@ -18,7 +18,7 @@ BORDER_COLOR = "#ff0000"
 
 def draw_grid_and_plane(canvas: tk.Canvas, aircraft: Aircraft):
     # Borra todo el contenido del canvas
-
+    canvas.delete("all")
 
     # Dibuja las líneas verticales del grid
     for i in range(0, WINDOW_SIZE[0], CELL_SIZE):
@@ -137,19 +137,14 @@ def main():
 
             initial_position = Position(longitude=0, latitude=0)
             aircraft_1 = Aircraft.create(
-                initial_position, TERRITORY, direction=Direction.NorthEast
-            )
-            aircraft_2 = Aircraft.create(
-                initial_position.go_down_right(), TERRITORY, direction=Direction.North
+                initial_position, TERRITORY, direction=Direction.North
             )
             while True:
                 aircraft_1.move()
-                aircraft_2.move()
                 draw_grid_and_plane(canvas, aircraft_1)
-                draw_grid_and_plane(canvas, aircraft_2)
                 # Actualiza el canvas y espera un breve periodo de tiempo
                 root.update()
-                time.sleep(0.3)
+                time.sleep(0.1)
 
         if event == sg.WIN_CLOSED or event == "Salir":
             break
